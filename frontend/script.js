@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
     //registra el SW especificado en el archivo service-worker.js
     navigator.serviceWorker.register('service-worker.js').then(() => {
       console.log('Service Worker registrado');
-    }).catch(() => {
+    }).catch((error) => {
       console.log('Error al registrar el Service Worker:', error);
     });
   }

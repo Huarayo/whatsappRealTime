@@ -1,0 +1,26 @@
+##FRONTEND
+
+Contexto:
+
+Dónde: Este código se ejecuta en el Service Worker, que es un script que se ejecuta en segundo plano en el navegador.
+
+Qué hace: Escucha mensajes enviados desde las pestañas que están controladas por el Service Worker. Cuando recibe un mensaje, lo envía al servidor WebSocket.
+
+Flujo de Comunicación:
+Origen del Mensaje: La pestaña del navegador envía un mensaje al Service Worker (por ejemplo, usando postMessage).
+Propósito: Permitir que las pestañas se comuniquen con el servidor a través del WebSocket.
+
+
+
+
+##BACKEND
+Contexto:
+Dónde: Este código se ejecuta en el servidor, específicamente en el entorno de Node.js.
+
+Qué hace: Escucha mensajes que llegan a través de una conexión WebSocket de un cliente (que podría ser el Service Worker o cualquier otro cliente WebSocket).
+
+Flujo de Comunicación:
+Origen del Mensaje: El mensaje proviene de un cliente WebSocket conectado (que puede ser el Service Worker, o un navegador que se conecta directamente al WebSocket).
+
+Propósito: Procesar el mensaje recibido y, posiblemente, reenviarlo a otros clientes conectados.
+
