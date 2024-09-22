@@ -1,5 +1,9 @@
 {
+  "scripts":{
+    "start": "node serverWebSocket.js"
+  },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "ws": "^8.18.0"
   }
 }
