@@ -1,60 +1,59 @@
-//conexión al servidor WebSocket y manejar la comunicación entre el servidor y las pestañas
-//Service Workers interceptaran los mensajes de las pestañas y lo enviará al servidor WebSocket
 let socket;
 
 self.addEventListener('install', (event) => {
   console.log('Service Worker instalado');
-  //permite que el nuevo sw tome el control inmediatamente, sin esperar a que las pestañas abiertas se cierren
-  self.skipWaiting(); //hace que el SW esté activo de inmediato
-})
-
-
+  // Permitir que el nuevo SW tome el control inmediatamente
+  self.skipWaiting();
+});
 
 self.addEventListener('activate', (event) => {
   console.log('Service Worker activado');
 
-  socket = new WebSocket('ws://localhost:3000');
-  
-  //Reenviar el mensaje a  todas las pestañas controladas por el SW
-  socket.addEventListener('message', (event) => {
-    self.clients.matchAll().then(clients => {
-      clients.forEach(client => {
-        client.postMessage(JSON.parse(event.data));
-      })
-    })
+  // Conexión WebSocket al servidor
+  socket = new WebSocket('ws://localhost:4000'); // Asegúrate de que el puerto coincida con el servidor
+
+  socket.addEventListener('open', () => {
+    console.log('Conexión WebSocket establecida');
   });
 
-  
-  socket.addEventListener('open', () => {
-    console.log('Conexión WeSocket establecida');
-  })
+  socket.addEventListener('message', (event) => {
+    
+    if (event.data instanceof Blob) {
+      event.data.text().then((text) => {
 
-  socket.addEventListener('close', () =>{
+        const parsedData = JSON.parse(text);
+        // Reenviar el mensaje a todas las pestañas controladas por el SW
+        self.clients.matchAll().then(clients => {
+          clients.forEach(client => {
+            client.postMessage(parsedData); // Enviar a las pestañas
+          });
+        });
+
+      })
+    }
+
+  });
+
+  socket.addEventListener('close', () => {
     console.log('Conexión WebSocket cerrada');
-  })
+  });
 
-  socket.addEventListener('error', (error)=> {
-    console.log("Error en WebSocket:" + error)
-  })
-})
-
-
-//Escucha mensajes enviados desde las pestañas que están controladas por el Service Worker. Cunado recibe un mensaje, envía al servidor
-self.addEventListener('message', (event) => {
-  //clients: instancias de las pestañas que están bajo el control de ese SW, cada vez que un sw se registra y activa puede controlar varias pestañas abiertas que han cargado el mismo origen
-  //matchAll() obtiene una lista de todas las pestañas y contextos(como iframes) que estan controlados por sw, devuelve promesa que se resuelve con un arreglo de objetos
-  // console.log("Mensaje recibido en SW:", event.data); 
-  // self.clients.matchAll().then(clients => {
-  //   clients.forEach(client => {
-  //     //envia el mensaje recibido a cada pestaña
-  //     client.postMessage(event.data);
-  //   })
-  // })
-
-  if(socket && socket.readyState === WebSocket.OPEN) {
-    socket.send(JSON.stringify(event.data))
-  }
-
+  socket.addEventListener('error', (error) => {
+    console.error('Error en WebSocket:', error);
+  });
 });
 
-//E
+// Escuchar mensajes enviados desde las pestañas controladas por el SW
+self.addEventListener('message', (event) => {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    // Enviar el mensaje recibido al servidor WebSocket
+    socket.send(JSON.stringify(event.data));
+  }
+
+  //SI EL WEBSOCKET ANDA BIEN ENTONCES ESTO LO OMITIMOS PORQUE AHORA EL SERVICE WORKER ES UN INTERMEDIARIO DE ENVIAR DATOS AL DE LA PESTAÑA AL WEBSOCKET SERVIDOR PARA QUE SE LO ENVIE A TODOS LAS PESTAÑAS CONECTADAS NO SOLO A LA PESTAÑAS DEL DISPOSITIVO
+  // self.clients.matchAll().then((clients)=>{
+  //   clients.forEach(client => {
+  //     client.postMessage(event.data)
+  //   })
+  // })
+});
