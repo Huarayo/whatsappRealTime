@@ -47,7 +47,6 @@ li {
   background: url('./fondo.jpg');
   background-size: cover;
   position: relative;
-  background-color: red;
   height: calc(100vh - 70px);
   width: 100%;
   max-width: 400px;
