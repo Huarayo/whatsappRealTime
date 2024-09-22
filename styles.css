@@ -1,0 +1,180 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin:0;
+  padding:0
+}
+
+h1 {
+  text-align: center;
+  padding: 10px 0;
+
+}
+
+li {
+  width: 200px;
+  color:black
+}
+
+.scrollText {
+  overflow-y: auto;
+  flex-grow: 1; /*area del chat ocupe el espacio vertical restante,permitiendo que el contenido del chat se despliegue dentro de un área desplazable*/
+}
+
+.scrollText::-webkit-scrollbar {
+  display:none;
+}
+
+.scrollText {
+  scrollbar-width: none; /*firefox*/
+}
+#message-recived {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px 0;
+  overflow-y: auto;
+}
+
+
+.containerChat {
+  background: url('./fondo.jpg');
+  background-size: cover;
+  position: relative;
+  background-color: red;
+  height: calc(100vh - 70px);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top:-15px;
+  padding: 10px;
+  display: flex;/* contenido del chat ocupe el espacio restante, mientras la barra de mensajes se mantienen en la parte inferior*/
+  flex-direction: column;/*para que el contenido y la barra de mensajes estén en una columna*/
+  padding-bottom: 60px;
+}
+
+.containerBarMessage {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%); 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 5px 10px;
+  background-color: rgba(0,0,0,0.1);
+  z-index:100;
+}
+
+.containerBarMessage textarea {
+  width: 85%;
+  padding:20px;
+  border-radius: 35px;
+  border:none;
+  -webkit-border-radius: 35px;
+  -moz-border-radius: 35px;
+  -ms-border-radius: 35px;
+  -o-border-radius: 35px;
+  box-shadow: none;
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  resize:none;
+  min-height: 40px;
+  max-height: 120px;
+}
+/* Ocultar el scrollbar */
+.containerBarMessage textarea::-webkit-scrollbar {
+  display: none; /* Para Chrome y Safari */
+}
+
+.containerBarMessage textarea {
+  scrollbar-width: none; /* Para Firefox */
+}
+
+
+
+.containerBarMessage button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  display: flex;
+  justify-content: center; /* Centra el ícono horizontalmente */
+  align-items: center; /* Centra el ícono verticalmente */
+  background-color: #25d366
+}
+
+
+/* MENSAJES */
+
+.green {
+  position: relative;
+  background-color: rgb(0, 78, 0);
+  width: fit-content;
+  max-width: 80%;
+  padding: 10px;
+  margin: 10px;
+  white-space: pre-wrap; /*permiteelajustedelaslineas*/
+  overflow-wrap: break-word; /*Aseguraquelaspalabraslargasnocusendesbordamiento*/;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  z-index:10;
+}
+
+.green:first-child::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(0, 78, 0);
+  clip-path: polygon(0 0, 100% 0%, 38% 100%, 0% 100%);
+  top: 0;
+  right: -8px;
+  z-index:-10;
+}
+
+.black {
+  position:relative;
+  background-color: black;
+  width: fit-content;
+  max-width: 80%;
+  padding: 10px;
+  margin: 10px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  z-index:10;
+}
+
+.black:first-child::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -8px;
+  width:20px;
+  height: 20px;
+  background-color: black;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 58% 100%);
+  z-index:-10
+}
