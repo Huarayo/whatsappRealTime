@@ -1,9 +1,12 @@
 {
-  "scripts":{
-    "start": "node serverWebSocket.js"
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "serverWebSocket.js",
+  "scripts": {
+    "start": "node serverWebSocket.js",
+    "deploy": "node serverWebSocket.js"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "ws": "^8.18.0"
+    "ws": "^8.0.0"
   }
 }
