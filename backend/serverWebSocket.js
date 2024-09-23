@@ -9,16 +9,15 @@ const wss = new WebSocket.Server({ port: PORT });
 wss.on('connection', (ws) => {
   console.log('Conexión WebSocket establecida');
 
+  // enviados por postMessage Service worker
   // Escuchar mensajes del cliente (cada conexión tiene su propio "ws")
   ws.on('message', (message) => {
-    console.log('Mensaje recibido del cliente:', message);
-
-    // Enviar el mensaje a todos los clientes conectados
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(message); // Enviar el mensaje recibido a todos los clientes
+    const messageToSend = message.toString();
+    wss.clients.forEach(client => {
+      if(client.readyState === WebSocket.OPEN) {
+        client.send(messageToSend)
       }
-    });
+    })
   });
 
   // Manejar cierre de la conexión
