@@ -1,6 +1,5 @@
 {
   "scripts":{
-    "deploy": "echo 'WebSocket service ready'",
     "start": "node serverWebSocket.js"
   },
   "dependencies": {
