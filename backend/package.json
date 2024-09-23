@@ -1,8 +1,7 @@
 {
   "scripts":{
-    "start": "node serverWebSocket.js",
-    "build": "cd ../frontend && npm install && npm run build",
-    "deploy": "npm run build && npm start"
+    "deploy": "echo 'WebSocket service ready'",
+    "start": "node serverWebSocket.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
