@@ -1,0 +1,11 @@
+{
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    },
+    "command": "cd backend && npm run deploy"
+  },
+  "start": {
+    "command": "cd backend && npm start"
+  }
+}
