@@ -1,3 +1,14 @@
+##SIMPLEMENTE
+1.Ejecuta el service worker en segundo plano y como tiene el comportamiento por defecto de compartir el postMessage a todas las pestañas del navegador de manera local (EASY PEACE)
+2.Manejar en envio y recepcion del mensaje y aplicar logica para identificar la pestaña que envia el mensaje y ponerlo de negro y si es mío mensaje que lo ponga de verde. (MEDIO COPLEX)
+3.Aplicar estilos css ,tecnicas para dejarle un acabado parecido al de whatsapp
+4.Como todo andaba de maravilla digo bueno agreguemos una funcionalidad para que esto no solo sea local sino que trabaje con las pestañas que envien del mismo origen asi que investigue y me tope con WebSocket pero estos trabajan en el backend asi que cree un backend servidor http y WebSocket
+5.El desafío estaba en conectar los mensajes que se envian de todas las computadora en el mismo origen a mi computadora a mis pestañas son muchos hilos.
+6.Websocket conecta a las computadoras y si hay un postMessage en el backedn se los envia a todas las computadoras y pestañas.
+7.En el FrontEnd utilice SocketIO para manejar Los mensajes del servidor en el front.
+8.Luego el desafío era implementarlo sin afectar a lo que ya tenía hecho de manera local, asi que utilice el postMessage del service worker para enviarle el mensaje a todas las pestañas, el socket io lo conecte al service worker
+9.Proceso bastante complejo de asimilar de golpe pero DIVIDE Y GANARÁS.
+
 ##FRONTEND
 
 Contexto:
